@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: nginx-deployment
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: nginx
@@ -17,3 +17,9 @@ spec:
         image: nginx:latest
         ports:
         - containerPort: 80
+        env:
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: nginx-secret
+              key: api-key  # Reference the secret key
